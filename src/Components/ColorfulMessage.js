@@ -1,15 +1,17 @@
 import React from 'react';
 
 const ColorfulMessage = (props) => {
-  console.log(props);
+  const {color, message} = props;
+  // console.log(props);
 
   const contentStyle = {
-    color: props.color,
+    // color: color; は省略できる。
+    color,
     fontSize: '18px',
   }
 
   return(
-     <p style={contentStyle}>{props.message}</p>
+     <p style={contentStyle}>{message}</p>
     
   );
 }
