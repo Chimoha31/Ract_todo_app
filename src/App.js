@@ -1,41 +1,55 @@
-import React, { useEffect, useState } from "react";
-import ColorfulMessage from "./Components/ColorfulMessage";
+import React, { useState } from "react";
+import "./App.css";
 
 const App = () => {
-  console.log("最初");
-  const [num, setNum] = useState(0);
-  const[faceShowFlag, setFaceShowFlag] = useState(true);
+  const [todoText, setTodoText] = useState('');
 
-  const onClickCountUp = () => {
-    setNum(num + 1);
+  const [incompleteTodos, setIncompleteTodos] = useState([
+    "あああああ",
+    "いいいいい",
+  ]);
+
+  const [completeTodos, setCompleteTodos] = useState(["ううううう"]);
+
+  const onChangeTodoText = (event) => {
+    return setTodoText(event.target.value);
   }
-
-  const onClickSwitchShowFlag = () => {
-   setFaceShowFlag(!faceShowFlag);
-  }
-
-  useEffect(() => {
-    if(num > 0){
-      if(num %3 === 0){
-        faceShowFlag || setFaceShowFlag(true);
-      }else{
-        faceShowFlag && setFaceShowFlag(false);
-      }
-    }
-  }, [num]);
 
   return (
     <>
-      <h1 style={{ color: "red" }}>こんにちは</h1>
-      <ColorfulMessage color="blue" message="お元気ですか" />
-      <ColorfulMessage color="pink" message="元気です" />
-      <button onClick={onClickCountUp}>カウントアップ</button>
-      <br />
-      <button onClick={onClickSwitchShowFlag}>on / off</button>
-      <p>{num}</p>
+      <div className="input_area">
+        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText}></input>
+        <button>追加</button>
+      </div>
 
-      {faceShowFlag && <p>😍</p>}
-      
+      <div className="incomplete_area">
+        <p className="title">未完了のTODO</p>
+        <ul>
+          {incompleteTodos.map((todo) => {
+            return (
+              <div key={todo} className="list_row">
+                <li>{todo}</li>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div className="complete_area">
+        <p className="title">完了したTODO</p>
+        <ul>
+          {completeTodos.map((todo) => {
+            return (
+              <div key={todo} className="list_row">
+                <li>{todo}</li>
+                <button>戻す</button>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 };
