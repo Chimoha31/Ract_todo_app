@@ -15,22 +15,38 @@ const App = () => {
     return setTodoText(event.target.value);
   }
 
+  const onClickAdd = () => {
+    if(todoText === "") return;
+    const newTodos = [...incompleteTodos, todoText];
+    setIncompleteTodos(newTodos);
+    setTodoText('');
+    // alert(todoText);
+  }
+
+  const onClickDelete = (index) => {
+    const newTodos = [...incompleteTodos];
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
+    // alert(index);
+  }
+
+
   return (
     <>
       <div className="input_area">
         <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText}></input>
-        <button>追加</button>
+        <button onClick={onClickAdd}>追加</button>
       </div>
 
       <div className="incomplete_area">
         <p className="title">未完了のTODO</p>
         <ul>
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <div key={todo} className="list_row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
           })}
