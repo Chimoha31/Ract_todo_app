@@ -1,4 +1,5 @@
 import React from "react";
+import "../Components/IncompleteTodos.css";
 
 const IncompleteTodos = (props) => {
   const { todos, onClickComplete, onClickDelete} = props;

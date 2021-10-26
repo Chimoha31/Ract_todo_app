@@ -1,4 +1,5 @@
 import React from 'react';
+import "../Components/CompleteTodos.css";
 
 const CompleteTodos = (props) => {
   const {todos, onClickBack} = props;
